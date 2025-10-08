@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Big Confetti</title>
+  <title>Big Confetti Fade</title>
   <style>
     html, body {
       margin: 0;
@@ -10,6 +10,7 @@
       overflow: hidden;
       width: 100%;
       height: 100%;
+      background: white; /* optional */
     }
     canvas {
       position: fixed;
@@ -18,6 +19,8 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      opacity: 1;
+      transition: opacity 1.5s ease; /* fade transition */
     }
   </style>
 </head>
@@ -28,16 +31,31 @@
     const canvas = document.getElementById('confetti-canvas');
     const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
 
-    // Animate confetti continuously
-    (function frame() {
+    const duration = 3000; // run confetti for 3 seconds
+    const endTime = Date.now() + duration;
+    let animating = true;
+
+    function frame() {
+      if (!animating) return;
+      const timeLeft = endTime - Date.now();
+      if (timeLeft <= 0) {
+        // stop animation and fade out
+        animating = false;
+        canvas.style.opacity = 0; // triggers CSS fade
+        return;
+      }
+
       myConfetti({
         particleCount: 5,
         spread: 60,
         origin: { y: 0 },
-        scalar: 3  // <-- Bigger particles (default is 1)
+        scalar: 3
       });
+
       requestAnimationFrame(frame);
-    })();
+    }
+
+    frame();
   </script>
 </body>
 </html>
