@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Giant Confetti App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Big Confetti</title>
   <style>
     html, body {
       margin: 0;
@@ -11,7 +10,6 @@
       overflow: hidden;
       width: 100%;
       height: 100%;
-      font-family: Arial, sans-serif;
     }
     canvas {
       position: fixed;
@@ -19,74 +17,34 @@
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none; /* confetti won't block clicks */
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      pointer-events: auto; /* UI is clickable */
-      z-index: 1;
-    }
-    button {
-      font-size: 24px;
-      padding: 16px 32px;
-      margin: 12px;
-      cursor: pointer;
-    }
-    h1 {
-      color: #333;
-      margin-bottom: 24px;
-      text-align: center;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <canvas id="confetti-canvas"></canvas>
-
-  <!-- UI Overlay -->
-  <div class="overlay">
-    <h1>Welcome to the Confetti App!</h1>
-    <button onclick="alert('Button clicked!')">Click Me</button>
-    <button onclick="alert('Another button!')">Another Button</button>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const canvas = document.getElementById('confetti-canvas');
-
-    // Make canvas high-resolution for mobile
-    canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * window.devicePixelRatio;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-
     const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
 
-    // Continuous huge confetti
+    // Animate big confetti continuously
     (function frame() {
       myConfetti({
-        particleCount: 2,      // few but giant pieces
-        spread: 150,           // wide spread
-        origin: { y: 0 },      // start at top
-        scalar: 25,            // MASSIVE particles
-        shapes: ['square','circle'],
-        gravity: 0.5,
-        drift: 3,
-        startVelocity: 60      // faster fall
+        particleCount: 2,          // Fewer but bigger pieces
+        spread: 100,               // Wider spread
+        origin: { y: 0 },          // Start at top
+        scalar: 6,                 // Extra large size
+        shapes: ['square', 'circle'],
+        gravity: 0.6,              // Makes them fall naturally
+        drift: 2,                  // Slight horizontal movement
+        startVelocity: 30          // Fast enough to be noticeable
       });
       requestAnimationFrame(frame);
     })();
   </script>
 </body>
 </html>
-
 
 
 
