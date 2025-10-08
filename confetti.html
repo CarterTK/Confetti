@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Huge Confetti</title>
+  <title>Giant Confetti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
     html, body {
       margin: 0;
@@ -17,7 +18,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
+      pointer-events: none; /* lets clicks go through */
     }
   </style>
 </head>
@@ -26,25 +27,33 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const canvas = document.getElementById('confetti-canvas');
+
+    // Set high-resolution canvas for mobile devices
+    canvas.width = window.innerWidth * window.devicePixelRatio;
+    canvas.height = window.innerHeight * window.devicePixelRatio;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+
     const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
 
-    // Continuous huge confetti
+    // Continuous giant confetti
     (function frame() {
       myConfetti({
-        particleCount: 1,          // very few but gigantic pieces
-        spread: 120,               // wide spread
-        origin: { y: 0 },          // start from top
-        scalar: 12,                // HUGE particles
+        particleCount: 2,        // few but huge particles
+        spread: 120,             // wide spread
+        origin: { y: 0 },        // start from top
+        scalar: 15,              // very big
         shapes: ['square', 'circle'],
-        gravity: 0.5,              // falls naturally
-        drift: 3,                  // slight horizontal drift
-        startVelocity: 50          // fast fall
+        gravity: 0.5,
+        drift: 3,
+        startVelocity: 50
       });
       requestAnimationFrame(frame);
     })();
   </script>
 </body>
 </html>
+
 
 
 
