@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Big Confetti</title>
+  <title>Huge Confetti</title>
   <style>
     html, body {
       margin: 0;
@@ -28,23 +28,24 @@
     const canvas = document.getElementById('confetti-canvas');
     const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
 
-    // Animate big confetti continuously
+    // Continuous huge confetti
     (function frame() {
       myConfetti({
-        particleCount: 2,          // Fewer but bigger pieces
-        spread: 100,               // Wider spread
-        origin: { y: 0 },          // Start at top
-        scalar: 6,                 // Extra large size
+        particleCount: 1,          // very few but gigantic pieces
+        spread: 120,               // wide spread
+        origin: { y: 0 },          // start from top
+        scalar: 12,                // HUGE particles
         shapes: ['square', 'circle'],
-        gravity: 0.6,              // Makes them fall naturally
-        drift: 2,                  // Slight horizontal movement
-        startVelocity: 30          // Fast enough to be noticeable
+        gravity: 0.5,              // falls naturally
+        drift: 3,                  // slight horizontal drift
+        startVelocity: 50          // fast fall
       });
       requestAnimationFrame(frame);
     })();
   </script>
 </body>
 </html>
+
 
 
 
