@@ -23,6 +23,28 @@
 </head>
 <body>
   <canvas id="confetti-canvas"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confett
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
+
+    // Animate big confetti continuously
+    (function frame() {
+      myConfetti({
+        particleCount: 2,          // Fewer but bigger pieces
+        spread: 100,               // Wider spread
+        origin: { y: 0 },          // Start at top
+        scalar: 6,                 // Extra large size
+        shapes: ['square', 'circle'],
+        gravity: 0.6,              // Makes them fall naturally
+        drift: 2,                  // Slight horizontal movement
+        startVelocity: 30          // Fast enough to be noticeable
+      });
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>
+
 
 
