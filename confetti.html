@@ -3,25 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>Confetti</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* prevent scrollbars */
+      width: 100%;
+      height: 100%;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* so clicks pass through */
+    }
+  </style>
 </head>
 <body>
-  <canvas id="confetti-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;"></canvas>
+  <canvas id="confetti-canvas"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
-    // Make the confetti fall continuously
-    const duration = 5000; // duration in milliseconds
-    const end = Date.now() + duration;
+    // Resize canvas to full window
+    const canvas = document.getElementById('confetti-canvas');
+    const myConfetti = confetti.create(canvas, { resize: true, useWorker: true });
 
+    // Animate confetti continuously
     (function frame() {
-      confetti({
+      myConfetti({
         particleCount: 5,
         spread: 60,
         origin: { y: 0 }
       });
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
+      requestAnimationFrame(frame);
     })();
   </script>
 </body>
 </html>
+
